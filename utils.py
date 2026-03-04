@@ -29,6 +29,8 @@ def find_duplicates(items):
 
 def safe_divide(a, b):
     """Safely divide two numbers."""
+    if b == 0:
+        return None
     return a / b
 
 

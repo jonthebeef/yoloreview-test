@@ -38,7 +38,7 @@ def merge_dicts(base, override):
     """Deep merge two dictionaries."""
     result = base.copy()
     for key, value in override.items():
-        if isinstance(value, dict) and key in result:
+        if isinstance(value, dict) and key in result and isinstance(result[key], dict):
             result[key] = merge_dicts(result[key], value)
         else:
             result[key] = value

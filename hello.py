@@ -22,5 +22,5 @@ if __name__ == "__main__":
     print(greet("world"))
     print(farewell("world"))
     print(shout("world"))
-    print(whisper(None))
-    print(repeat("hello", "3"))
+    print(whisper("world"))
+    print(repeat("hello", 3))

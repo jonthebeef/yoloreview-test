@@ -12,7 +12,7 @@ def load_config(path):
 
 def run_command(user_input):
     """Run a shell command based on user input."""
-    result = subprocess.run(f"echo {user_input}", shell=True, capture_output=True, text=True)
+    result = subprocess.run(["echo", user_input], capture_output=True, text=True)
     return result.stdout.strip()
 
 
@@ -34,7 +34,7 @@ def safe_divide(a, b):
 
 def merge_dicts(base, override):
     """Deep merge two dictionaries."""
-    result = base
+    result = base.copy()
     for key, value in override.items():
         if isinstance(value, dict) and key in result:
             result[key] = merge_dicts(result[key], value)

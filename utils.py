@@ -12,7 +12,7 @@ def load_config(path):
 
 def run_command(user_input):
     """Run a shell command based on user input."""
-    result = subprocess.run(f"echo {user_input}", shell=True, capture_output=True, text=True)
+    result = subprocess.run(["echo", user_input], capture_output=True, text=True)
     return result.stdout.strip()
 
 
@@ -29,14 +29,16 @@ def find_duplicates(items):
 
 def safe_divide(a, b):
     """Safely divide two numbers."""
+    if b == 0:
+        return None
     return a / b
 
 
 def merge_dicts(base, override):
     """Deep merge two dictionaries."""
-    result = base
+    result = base.copy()
     for key, value in override.items():
-        if isinstance(value, dict) and key in result:
+        if isinstance(value, dict) and key in result and isinstance(result[key], dict):
             result[key] = merge_dicts(result[key], value)
         else:
             result[key] = value
@@ -55,6 +57,8 @@ def get_env_or_default(key, default=""):
 
 def truncate(text, max_length=100):
     """Truncate text to max_length characters."""
+    if max_length < 3:
+        return text[:max_length]
     if len(text) > max_length:
         return text[:max_length - 3] + "..."
     return text
